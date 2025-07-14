@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reddit User Persona</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      background-color: #fff;
+    }
+    .container {
+      /* display: grid;
+      grid-template-columns: 1fr 2fr; */
+      width: 100%;
+      padding: 30px;
+    }
+    .left {
+      text-align: center;
+      padding-right: 30px;
+    }
+    .left img {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+    .quote {
+      background-color: #e94e1b;
+      color: white;
+      padding: 1em;
+      margin-top: 1em;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .right h1 {
+      color: #e94e1b;
+      font-size: 2em;
+      margin-bottom: 0.2em;
+    }
+    .section {
+      margin-bottom: 2em;
+    }
+    .section h2 {
+      color: #e94e1b;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.3em;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: auto auto;
+      row-gap: 0.4em;
+      column-gap: 1em;
+    }
+    .bar-container {
+      width: 100%;
+      background: #eee;
+      height: 10px;
+      border-radius: 3px;
+    }
+    .bar {
+      height: 10px;
+      background-color: #555;
+      border-radius: 3px;
+    }
+    .tags span {
+      background-color: #eee;
+      padding: 3px 8px;
+      margin-right: 5px;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+    ul {
+      padding-left: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <img src="https://via.placeholder.com/300x400" alt="Persona Image">
+      <div class="quote">{{ quote.text }}</div>
+    </div>
+    <div class="right">
+      
+
+      <div class="section">
+        <h2>{{ username or 'Reddit User' }}</h2>
+        <div class="info-grid">
+          <div>Age:</div><div>{{ basic_information.age }}</div>
+          <div>Occupation:</div><div>{{ basic_information.occupation }}</div>
+          <div>Status:</div><div>{{ basic_information.status }}</div>
+          <div>Location:</div><div>{{ basic_information.location }}</div>
+          <div>Tier:</div><div>{{ basic_information.tier }}</div>
+          <div>Archetype:</div><div>{{ basic_information.archetype }}</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>TRAITS</h2>
+        <div class="tags">
+          {% for trait in traits[0].split('|') %}<span>{{ trait.strip() }}</span>{% endfor %}
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>MOTIVATIONS</h2>
+        {% for key, value in motivations.items() %}
+        <div>{{ key | capitalize }}</div>
+        <div class="bar-container">
+          <div class="bar" style="width: {{ value.score * 10 }}%"></div>
+        </div>
+        {% endfor %}
+      </div>
+
+
+
+      <div class="section">
+        <h2>PERSONALITY</h2>
+        {% for key, value in personality.items() %}
+        <div>{{ key | capitalize }}</div>
+        <div class="bar-container">
+          <div class="bar" style="width: {{ value.score * 10 }}%"></div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="section">
+        <h2>BEHAVIOUR & HABITS</h2>
+        <ul>
+          {% for b in behaviour_and_habits %}<li>{{ b }}</li>{% endfor %}
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>FRUSTRATIONS</h2>
+        <ul>
+          {% for f in frustrations %}<li>{{ f }}</li>{% endfor %}
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>GOALS & NEEDS</h2>
+        <ul>
+          {% for g in goals_and_needs %}<li>{{ g }}</li>{% endfor %}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
