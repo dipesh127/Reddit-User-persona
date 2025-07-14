@@ -95,6 +95,6 @@ These files were generated using the script and serve as references. To generate
 
 Output Example:
 
-![Alt text](path/to/1.jpg)
+![Alt text](1.jpg)
 ![Alt text](path/to/2.jpg)
 ![Alt text](path/to/3.jpg)
